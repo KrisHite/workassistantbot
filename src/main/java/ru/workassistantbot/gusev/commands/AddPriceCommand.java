@@ -29,7 +29,7 @@ public class AddPriceCommand {
     try {
         excel.AddInExcel(dataOfText[0], Double.valueOf(dataOfText[1]));
         message.setText("Добавлено!");
-    }catch (NumberFormatException e){
+    }catch (Exception e){
         message.setText(logs.getLog("[" + update.getMessage().getChat().getFirstName() + "]: \""
                 + text + "\" -- " + getClass().getName() + " -- " + e));
     }
