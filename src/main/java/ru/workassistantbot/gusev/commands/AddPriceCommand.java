@@ -17,7 +17,7 @@ public class AddPriceCommand {
         String chatId = String.valueOf(update.getMessage().getChatId());
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        message.setText("Введите наименование работы и расценки за единицу:");
+        message.setText("Введите наименование работы и расценки за единицу, через запятую:");
         return message;
     }
     public SendMessage run(Update update){
