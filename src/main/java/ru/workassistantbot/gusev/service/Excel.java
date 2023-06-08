@@ -26,22 +26,29 @@ public class Excel {
         Logs logs;
 
     public void createExcelFile(String userName)  {//Создание нового файла, если его нет
-            //Создаю файл
-            File newFile = new File(filePath + userName + ".xlsx");
-            //Создаю новую книгу Excel
-            XSSFWorkbook workbook = new XSSFWorkbook();
-            //Создаю новый лист в книге
-            GetSheet(workbook);
-            //Записываем книгу Excel в файл
-            try {
-                    WriteBook(workbook, newFile);
-            }catch (IOException e){
-                    logs.getLog("["+ userName +"] ---" + getClass().getName() + " -- " + e);
-            }
+        File newFile = new File(filePath);
+        newFile.mkdirs();
+        //Создаю файл
+        newFile = new File(filePath, userName + ".xlsx");
+        //Создаю новую книгу Excel
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        //Создаю новый лист в книге
+        GetSheet(workbook);
+        //Записываем книгу Excel в файл
+        try {
+            WriteBook(workbook, newFile);
+        }catch (IOException e){
+            logs.getLog("["+ userName +"] ---" + getClass().getName() + " -- " + e);
+        }
     }
         public void createPriceFile()  {//Создание нового файла c расценками, если его нет
+            if(new File(filePricePath,"Prices.xlsx").exists()){
+
+            }else {
+                File newFile = new File(filePricePath);
+                newFile.mkdirs();
                 //Создаю файл
-                File newFile = new File(filePricePath + "Prices.xlsx");
+                newFile = new File(filePricePath, "Prices.xlsx");
                 //Создаю новую книгу Excel
                 XSSFWorkbook workbook = new XSSFWorkbook();
                 //Создаю новый лист в книге
@@ -52,10 +59,11 @@ public class Excel {
                 headerRow.createCell(1).setCellValue("Стоимость единицы");
                 //Записываем книгу Excel в файл
                 try {
-                        WriteBook(workbook,newFile);
-                }catch (IOException e){
-                        logs.getLog("[Excel] ---" + getClass().getName() + " -- " + e);
+                    WriteBook(workbook, newFile);
+                } catch (IOException e) {
+                    logs.getLog("[Excel] ---" + getClass().getName() + " -- " + e);
                 }
+            }
         }
         public void WriteBook(XSSFWorkbook workbook, File file) throws IOException {
                 FileOutputStream outputStream = new FileOutputStream(file);
@@ -67,7 +75,7 @@ public class Excel {
         public void AddInExcel(String name, int quantity, String userName){
                 try {
                         //Открываю файл Excel
-                        FileInputStream inputStream = new FileInputStream(filePath + userName + ".xlsx");
+                        FileInputStream inputStream = new FileInputStream(filePath + "/" + userName + ".xlsx");
                         //Создаю экземпляр книги Excel из файла
                         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
                         XSSFSheet sheet = GetSheet(workbook);
@@ -90,7 +98,7 @@ public class Excel {
                                 row.createCell(3).setCellFormula("B" + (row.getRowNum() + 1) + "*C" + (row.getRowNum() + 1));
                         }
                                 //Записываем книгу Excel в файл
-                                FileOutputStream outputStream = new FileOutputStream(filePath + userName + ".xlsx");
+                                FileOutputStream outputStream = new FileOutputStream(filePath + "/" + userName + ".xlsx");
                                 workbook.write(outputStream);
                                 //Закрываю все потоки
                                 workbook.close();
@@ -104,7 +112,7 @@ public class Excel {
             createPriceFile();
                 try {
                         //Открываю файл Excel
-                        FileInputStream inputStream = new FileInputStream(filePricePath + "Prices.xlsx");
+                        FileInputStream inputStream = new FileInputStream(filePricePath + "/Prices.xlsx");
                         //Создаю экземпляр книги Excel из файла
                         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
                         XSSFSheet sheet = workbook.getSheetAt(0);
@@ -117,7 +125,7 @@ public class Excel {
                                 row.createCell(1).setCellValue(quantity);
                         }
                         //Записываем книгу Excel в файл
-                        FileOutputStream outputStream = new FileOutputStream(filePricePath + "Prices.xlsx");
+                        FileOutputStream outputStream = new FileOutputStream(filePricePath + "/Prices.xlsx");
                         workbook.write(outputStream);
                         outputStream.close();//Закрываю поток
                         workbook.close();
@@ -148,11 +156,11 @@ public class Excel {
                 try {
                     //Переписываю стоимость плат из файла
                     //Открываю Excel с расценками
-                    FileInputStream inputPriceStream = new FileInputStream(filePricePath + "Prices.xlsx");
+                    FileInputStream inputPriceStream = new FileInputStream(filePricePath + "/Prices.xlsx");
                     XSSFWorkbook priceWorkbook = new XSSFWorkbook(inputPriceStream);
                     XSSFSheet sheetOfPrice = priceWorkbook.getSheetAt(0);
                     //Открываю файл Excel c работой
-                    FileInputStream inputStream = new FileInputStream(filePath + userName + ".xlsx");
+                    FileInputStream inputStream = new FileInputStream(filePath + "/" + userName + ".xlsx");
                     XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
                     XSSFSheet sheet = workbook.getSheet(dataNow);
                     Row rowWork;

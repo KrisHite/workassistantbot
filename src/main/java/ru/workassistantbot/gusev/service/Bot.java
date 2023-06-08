@@ -1,6 +1,7 @@
 package ru.workassistantbot.gusev.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
@@ -12,6 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.workassistantbot.gusev.commands.CommandManager;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

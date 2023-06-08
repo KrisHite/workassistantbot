@@ -62,7 +62,7 @@ public class CommandManager {
                 String chatId = String.valueOf(update.getMessage().getChatId());
                 SendMessage message = new SendMessage();
                 message.setChatId(chatId);
-                message.setText("Я этого не понимаю.");
+                message.setText("Такой комманды нет. Если что-то непонятно, используйте комманду /help.");
                 return message;
             }
         }
@@ -80,7 +80,7 @@ public class CommandManager {
             default -> {
                 SendMessage message = new SendMessage();
                 message.setChatId(String.valueOf(update.getMessage().getChatId()));
-                message.setText("Моя твоя не понимать.");
+                message.setText("Я этого не понимаю. Если что-то непонятно, используйте комманду /help.");
                 return message;
             }
         }

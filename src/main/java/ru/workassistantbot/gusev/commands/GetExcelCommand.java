@@ -17,7 +17,7 @@ public class GetExcelCommand {
         String chatId = String.valueOf(update.getMessage().getChatId());
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        File doc = new File(filePath + update.getMessage().getChat().getFirstName() + ".xlsx");
+        File doc = new File(filePath, update.getMessage().getChat().getFirstName() + ".xlsx");
         if(!doc.exists()){
             message.setText("Excel файл отсутствует!");
         }else {
@@ -30,7 +30,7 @@ public class GetExcelCommand {
         String chatId = String.valueOf(update.getMessage().getChatId());
         String userName = update.getMessage().getChat().getFirstName();
 
-        File doc = new File(filePath + userName + ".xlsx");
+        File doc = new File(filePath, userName + ".xlsx");
         InputFile getDocument = new InputFile(doc, "Prices.xlsx");
 
         sendDocumentRequest.setChatId(chatId);

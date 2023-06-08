@@ -21,7 +21,7 @@ public class StartCommand {
         String userName = update.getMessage().getChat().getFirstName();
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        if(!new File(filePath + userName + ".xlsx").exists()){
+        if(!new File(filePath, userName + ".xlsx").exists()){
             excel.createExcelFile(userName);
             message.setText("Привет, " + userName + ". Я твой бот помощник. Я буду считать твою сделанную работу " +
                     "и скажу сколько ты примерно заработал. Более подробно ты узнаешь по команде /help");

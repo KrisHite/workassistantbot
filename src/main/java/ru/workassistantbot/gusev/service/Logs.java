@@ -19,9 +19,8 @@ public class Logs {
         System.out.println(e);
         CreateLogFile();//Создаю файл если его нет
         String data = getTimeDay();
-
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(logsPath + data + ".txt", true));
+            PrintWriter writer = new PrintWriter(new FileWriter(logsPath + "/" + data + ".txt", true));
             writer.println(getTimeSeconds() + e + "\n");//Добавить в логи время в формате HH-mm-ss
             writer.close();
         }catch (FileNotFoundException ex){
@@ -33,8 +32,9 @@ public class Logs {
     }
     private void CreateLogFile() {
         String data = getTimeDay();
-        File file;
-        file = new File(logsPath + data + ".txt");
+        File file = new File(logsPath);
+        file.mkdirs();
+        file = new File(logsPath,data + ".txt");
         if(!file.exists()){
             try {
                 file.createNewFile();
