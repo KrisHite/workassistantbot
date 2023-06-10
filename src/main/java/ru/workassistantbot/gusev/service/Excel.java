@@ -183,7 +183,7 @@ public class Excel {
                                 price = price + (float)ref;
                         }
                     //Закрываю все потоки
-                    FileOutputStream outputStream = new FileOutputStream(filePath + userName + ".xlsx");
+                    FileOutputStream outputStream = new FileOutputStream(filePath + "/" + userName + ".xlsx");
                     workbook.write(outputStream);
                     outputStream.close();//Закрываю поток
                     workbook.close();

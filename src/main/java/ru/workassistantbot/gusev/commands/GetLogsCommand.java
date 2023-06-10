@@ -23,7 +23,7 @@ public class GetLogsCommand {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String data = date.format(formatter);
 
-        File doc = new File(filePath + data + ".txt");
+        File doc = new File(filePath, data + ".txt");
         if(!doc.exists()){//Если файла с логами нет
             message.setText("Файл с логами отсутствует!");
         }else {
@@ -38,7 +38,7 @@ public class GetLogsCommand {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String data = date.format(formatter);
 
-        File doc = new File(filePath + data + ".txt");
+        File doc = new File(filePath, data + ".txt");
         InputFile getDocument = new InputFile(doc, data + ".txt");
         sendDocumentRequest.setChatId(chatId);
         sendDocumentRequest.setDocument(getDocument);
