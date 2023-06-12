@@ -13,8 +13,4 @@ public class BotConfig {
     String botName;
     @Value("${bot.token}")
     String botToken;
-    @Value("${excel.path_users}")
-    String excelUserPath;
-    @Value("${excel.path_prices}")
-    String excelPricePath;
 }

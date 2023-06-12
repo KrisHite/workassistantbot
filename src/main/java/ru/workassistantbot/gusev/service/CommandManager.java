@@ -1,10 +1,11 @@
-package ru.workassistantbot.gusev.commands;
+package ru.workassistantbot.gusev.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.workassistantbot.gusev.commands.*;
 
 /**
  * Тут бот понимает что за команда и вызывает соответствующие методы и классы

@@ -65,7 +65,7 @@ public class Excel {
                 }
             }
         }
-        public void WriteBook(XSSFWorkbook workbook, File file) throws IOException {
+        private void WriteBook(XSSFWorkbook workbook, File file) throws IOException {//Запись в файл
                 FileOutputStream outputStream = new FileOutputStream(file);
                 workbook.write(outputStream);
                 workbook.close();
@@ -196,7 +196,7 @@ public class Excel {
             return "Сегодня вы заработали примерно " + price + " рублей.";
         }
 
-        public Row findRow(XSSFSheet sheet, String nameOfBoard){//Метод ищет наименование и возвращает строку Excel
+        private Row findRow(XSSFSheet sheet, String nameOfBoard){//Метод ищет наименование и возвращает строку Excel
                 for(int i = 0; i <= sheet.getLastRowNum(); i++){
                         String name = sheet.getRow(i).getCell(0).getStringCellValue();
                         if(name.equals(nameOfBoard)){//Если есть такая строка
@@ -206,7 +206,7 @@ public class Excel {
             return null;
         }
 
-        public String getTime(){//Метод возвращает текущую дату
+        private String getTime(){//Метод возвращает текущую дату
                 LocalDate date = LocalDate.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 return date.format(formatter);
